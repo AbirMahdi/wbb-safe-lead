@@ -30,4 +30,4 @@ python3 build_site.py   # embed data -> site/index.html
 
 ## AI assistance
 
-Data analysis, statistical modeling, code, and page design were developed with the assistance of an AI tool (Claude, Anthropic). The author directed the project, reviewed the analysis and its verification against the official BTAA data set, and takes responsibility for the accuracy and content of this work.
+Data analysis and page design were developed with the help of an AI tool (Claude, Anthropic). The author directed the project, reviewed the analysis and its verification against the official BTAA data set.
