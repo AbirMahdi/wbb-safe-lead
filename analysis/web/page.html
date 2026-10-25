@@ -1,0 +1,702 @@
+<title>Is the Lead Safe?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How often does the team ahead hold on? 22,707 NCAA women's basketball games, 2022-23 to 2025-26.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Martian+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (~68ch) with figures that break out to a wider measure; the hero is a scoreboard the reader operates. */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --sunk:#eceef2; --ink:#10151f; --ink-2:#4b5363; --muted:#6c7383; --line:#d9dde4; --grid:#e8ebf0;
+  --accent:#c9501a; --accent-ink:#a8410f; --gold:#8e7537; --gold-fill:#cfb991;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --board:#141a24; --board-ink:#f3f4f6; --board-dim:#8b93a3; --board-lit:#ff8a4c;
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"Martian Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --mode:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#10131a; --surface:#171b23; --sunk:#1e232d; --ink:#eef0f4; --ink-2:#c2c7d2; --muted:#9aa1af; --line:#2d333e; --grid:#232833;
+  --accent:#f0763a; --accent-ink:#ff9a62; --gold:#d8c38e; --gold-fill:#cfb991;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --board:#0a0d12; --board-ink:#f3f4f6; --board-dim:#7d8596; --board-lit:#ff8a4c;
+  --mode:dark; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#10131a; --surface:#171b23; --sunk:#1e232d; --ink:#eef0f4; --ink-2:#c2c7d2; --muted:#9aa1af; --line:#2d333e; --grid:#232833;
+  --accent:#f0763a; --accent-ink:#ff9a62; --gold:#d8c38e; --gold-fill:#cfb991;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --board:#0a0d12; --board-ink:#f3f4f6; --board-dim:#7d8596; --board-lit:#ff8a4c;
+  --mode:dark; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.55;margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:700px;margin-inline:auto}
+.wide{max-width:1080px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1;margin:0;letter-spacing:.005em}
+h1{font-size:clamp(56px,11vw,120px);font-weight:900;text-transform:uppercase}
+h2{font-size:clamp(34px,5.2vw,52px);font-weight:800;text-transform:uppercase}
+h3{font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:22px;line-height:1.45;color:var(--ink-2);max-width:62ch}
+.prose{display:flex;flex-direction:column;gap:18px}
+.prose p{max-width:66ch}
+strong{font-weight:700}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--accent-ink);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+section{padding-block:72px;border-top:1px solid var(--line)}
+section.first{border-top:0;padding-top:40px}
+.sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+
+/* hero */
+header{padding-block:48px 8px}
+header .col{display:flex;flex-direction:column;gap:20px}
+.h1-sub{color:var(--accent)}
+
+/* scoreboard */
+.board{background:var(--board);color:var(--board-ink);border-radius:14px;padding:clamp(18px,3vw,32px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);box-shadow:0 1px 0 rgba(0,0,0,.04),0 18px 40px -24px rgba(10,13,18,.55)}
+@media (max-width:760px){.board{grid-template-columns:minmax(0,1fr)}}
+.board .eyebrow{color:var(--board-dim)}
+.ctrls{display:flex;flex-direction:column;gap:22px}
+.ctrl{display:flex;flex-direction:column;gap:8px}
+.ctrl-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.ctrl label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--board-dim)}
+.readout{font-family:var(--f-mono);font-size:22px;font-weight:600;color:var(--board-ink);font-variant-numeric:tabular-nums}
+.readout small{font-size:12px;color:var(--board-dim);font-weight:400;margin-left:6px;letter-spacing:.04em}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:#2f3746;border-radius:2px}
+input[type=range]::-moz-range-track{height:4px;background:#2f3746;border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--board-lit);margin-top:-9px;border:3px solid var(--board)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--board-lit);border:3px solid var(--board)}
+.ticks{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;color:var(--board-dim);letter-spacing:.04em}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.presets button{font:600 13px/1 var(--f-body);color:var(--board-ink);background:#222a37;border:1px solid #333c4b;border-radius:999px;padding:8px 12px;cursor:pointer}
+.presets button:hover{background:#2b3444}
+.result{display:flex;flex-direction:column;gap:14px;min-width:0}
+.big{font-family:var(--f-display);font-weight:900;font-size:clamp(88px,13vw,148px);line-height:.85;color:var(--board-lit);font-variant-numeric:tabular-nums}
+.big sup{font-size:.4em;vertical-align:.95em;margin-left:2px}
+.verdict{font-size:19px;line-height:1.4;color:var(--board-ink)}
+.dots{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;max-width:340px}
+.dots i{display:block;aspect-ratio:1;border-radius:50%;background:transparent;border:1.5px solid #4a5366}
+.dots i.on{background:var(--board-lit);border-color:var(--board-lit)}
+.evid{font-size:15px;line-height:1.45;color:var(--board-dim);border-top:1px solid #2a3240;padding-top:12px}
+.evid b{color:var(--board-ink);font-weight:600}
+.need{font-family:var(--f-mono);font-size:13px;color:var(--board-ink);letter-spacing:.02em}
+.need b{color:var(--board-lit)}
+
+/* figures */
+figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.fig-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;gap:14px}
+.fig-title{font-weight:700;font-size:17px}
+.fig-sub{font-size:15px;color:var(--ink-2)}
+figcaption{font-size:14px;color:var(--muted);max-width:80ch}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+svg text{font-family:var(--f-body);fill:var(--ink-2)}
+svg .ax{font-size:12px;fill:var(--muted)}
+svg .lab{font-size:13px;font-weight:600;fill:var(--ink)}
+svg .halo{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--sunk);flex-wrap:wrap}
+.seg button{font:600 14px/1 var(--f-body);color:var(--ink-2);background:transparent;border:0;border-radius:999px;padding:9px 14px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--ink-2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+.sw.line{height:3px;width:20px;border-radius:2px}
+.ramp{width:160px;height:10px;border-radius:5px}
+
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;line-height:1.35;box-shadow:0 8px 24px -12px rgba(0,0,0,.4);max-width:260px}
+.tip b{font-weight:700}
+.tip .t-m{color:var(--muted);font-size:13px}
+
+.rule{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media (max-width:560px){.rule{grid-template-columns:repeat(2,minmax(0,1fr))}.rule .r-cell:last-child{grid-column:span 2}}
+.r-cell{background:var(--surface);padding:16px 14px;display:flex;flex-direction:column;gap:6px}
+.r-cell .when{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.r-cell .pts{font-family:var(--f-display);font-weight:900;font-size:48px;line-height:.9;color:var(--ink);font-variant-numeric:tabular-nums}
+.r-cell .pts small{font-size:18px;font-weight:600;color:var(--muted);margin-left:4px}
+.formula{font-family:var(--f-mono);font-size:clamp(15px,2.4vw,19px);background:var(--sunk);border-radius:10px;padding:16px 18px;color:var(--ink);overflow-x:auto;white-space:nowrap}
+.formula b{color:var(--accent-ink)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button{font:600 14px/1.2 var(--f-body);color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.tabs button small{font-weight:400;font-size:12px;color:var(--muted)}
+.tabs button[aria-pressed=true]{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.rp-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end}
+.rp-score{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase}
+.rp-note{font-size:15px;color:var(--ink-2);max-width:62ch}
+.chip{display:inline-block;font:600 11px/1 var(--f-mono);letter-spacing:.06em;padding:4px 6px;border-radius:4px;background:var(--sunk);color:var(--ink-2);vertical-align:2px}
+.chip.b1g{background:var(--ink);color:var(--bg)}
+
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.num{white-space:nowrap}
+tr.pu td{background:color-mix(in srgb,var(--gold-fill) 22%,transparent)}
+details{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;color:var(--ink-2)}
+details > div{padding:0 14px 14px}
+
+.callout{border-left:4px solid var(--gold-fill);padding:4px 0 4px 16px;display:flex;flex-direction:column;gap:8px}
+.callout .eyebrow{color:var(--gold)}
+.method{font-size:16px;color:var(--ink-2)}
+.method h2,.method h3{color:var(--ink)}
+.method h3{font-size:20px;margin-top:8px}
+.method ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+footer{padding-block:40px 64px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .col{display:flex;flex-direction:column;gap:8px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){.dots i{transition:background-color .25s,border-color .25s}}
+</style>
+<!--/head-->
+
+<header class="wrap">
+  <div class="col">
+    <p class="eyebrow">NCAA Women's Basketball · <span class="num" id="m-games">22,707</span> Division I games · 2022-23 to 2025-26</p>
+    <h1>Is the lead<br><span class="h1-sub">safe?</span></h1>
+    <p class="lede">Every fan has done the math in their head with a few minutes left. Here is the answer from four seasons of play-by-play data: how often the team ahead actually holds on, and how big a lead has to be before you can relax.</p>
+  </div>
+</header>
+
+<main>
+<section class="first wrap" aria-labelledby="calc-h">
+  <div class="wide">
+    <h2 id="calc-h" class="eyebrow" style="font-family:var(--f-mono);font-size:12px;font-weight:400;letter-spacing:.08em;margin-bottom:14px">Set the scoreboard</h2>
+    <div class="board" role="group" aria-label="Lead safety calculator">
+      <div class="ctrls">
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="in-lead">Your lead</label><span class="readout" id="o-lead">10<small>PTS</small></span></div>
+          <input id="in-lead" type="range" min="1" max="25" step="1" value="10" aria-describedby="o-lead">
+          <div class="ticks" aria-hidden="true"><span>1</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span></div>
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="in-min">Game clock</label><span class="readout" id="o-min">Halftime<small>20 MIN LEFT</small></span></div>
+          <input id="in-min" type="range" min="1" max="39" step="1" value="20" aria-describedby="o-min">
+          <div class="ticks" aria-hidden="true"><span>Q1</span><span>Q2</span><span>Half</span><span>Q3</span><span>Q4</span><span>1:00</span></div>
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="in-pre">Pregame win chance</label><span class="readout" id="o-pre">50%<small>EVEN MATCHUP</small></span></div>
+          <input id="in-pre" type="range" min="10" max="90" step="5" value="50" aria-describedby="o-pre">
+          <div class="ticks" aria-hidden="true"><span>Big underdog</span><span>Even</span><span>Big favorite</span></div>
+        </div>
+        <div class="ctrl">
+          <span class="eyebrow">Try a spot</span>
+          <div class="presets" id="presets">
+            <button type="button" data-l="3" data-m="5" data-p="50">Up 3, 5:00 left</button>
+            <button type="button" data-l="10" data-m="20" data-p="50">Up 10 at the half</button>
+            <button type="button" data-l="15" data-m="20" data-p="25">Underdog up 15 at the half</button>
+            <button type="button" data-l="6" data-m="2" data-p="50">Up 6, 2:00 left</button>
+          </div>
+        </div>
+      </div>
+      <div class="result" aria-live="polite">
+        <span class="eyebrow">Chance the lead holds</span>
+        <div class="big" id="o-pct">81<sup>%</sup></div>
+        <p class="verdict" id="o-verdict"></p>
+        <div class="dots" id="dots" role="img" aria-label=""></div>
+        <p class="need" id="o-need"></p>
+        <p class="evid" id="o-evid"></p>
+      </div>
+    </div>
+    <p class="fig-sub" style="margin-top:12px;font-size:14px;color:var(--muted)">The percentage comes from a win-probability model fit to 2022-23 through 2024-25 and tested on 2025-26. The line under it is the raw count: real teams in the same spot.</p>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="map-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">The safety map</p>
+    <h2 id="map-h">A lead's worth grows as the clock runs</h2>
+    <p>Each square is one game situation: a lead size at a minute mark. Its shade shows how often teams in that spot went on to win, on the 50% to 100% scale above the chart. A 10-point lead at halftime held <strong class="num" id="t-10h">86%</strong> of the time. With 2 minutes left, the same 10 points held <strong class="num" id="t-10-2">99.9%</strong> of the time.</p>
+    <p>The orange line marks the lead that wins 95 times in 100 between evenly matched teams. Above the line you can start to relax.</p>
+  </div>
+  <div class="wide">
+    <figure class="fig-card" id="fig-map">
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Which games to show">
+          <button type="button" data-mode="all" aria-pressed="true">All games</button>
+          <button type="button" data-mode="even" aria-pressed="false">Evenly matched only</button>
+        </div>
+        <div class="legend" aria-hidden="true">
+          <span>50% <i class="ramp" id="ramp"></i> 100% held</span>
+          <span><i class="sw line" style="background:var(--accent)"></i>95% safe line</span>
+          <span><i class="sw" style="background:repeating-linear-gradient(45deg,var(--grid) 0 3px,var(--surface) 3px 6px);border:1px solid var(--line)"></i>Under 30 games</span>
+        </div>
+      </div>
+      <div class="scroll"><svg id="map" role="img" aria-labelledby="map-desc"><desc id="map-desc">Heatmap of how often the leading team won, by lead size from 1 to 25 points and minutes left from 39 to 1. Shading darkens toward the top right: bigger leads later in the game almost always hold.</desc></svg></div>
+      <figcaption>Leads measured at each whole minute of regulation. "Evenly matched" means each team had a 35% to 65% pregame chance to win, per ESPN's pregame forecast (5,754 games). Squares with fewer than 30 games are left unshaded.</figcaption>
+      <details><summary>Show the numbers as a table</summary><div class="scroll" id="map-table"></div></details>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="rule-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">The rule of thumb</p>
+    <h2 id="rule-h">The square-root rule</h2>
+    <p>The safe line follows a simple curve. In an even matchup, a lead is about 95% safe once it reaches</p>
+    <p class="formula">safe lead ≈ <b>3.7</b> × √(minutes left)</p>
+    <p>Time does not shrink a comeback's odds in a straight line. The number of possessions left falls with the clock, but the swings a team can string together shrink more slowly, roughly with the square root. That is why a 9-point lead with 5 minutes left is about as safe as a 17-point lead at halftime.</p>
+  </div>
+  <div class="col">
+    <p class="eyebrow" style="margin-bottom:10px">Lead needed to be 95% safe, even matchup</p>
+    <div class="rule" id="rule"></div>
+    <p class="fig-sub" style="margin-top:12px;font-size:14px;color:var(--muted)" id="rule-check"></p>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="who-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">Who's leading matters</p>
+    <h2 id="who-h">Early leads tell you who is better. Late leads tell you who will win.</h2>
+    <p>A 10-point lead in the first quarter means very different things depending on who has it. When a big favorite leads by 10, it usually stays that way, because the better team built the lead. When an underdog leads by 10 early, the favorite comes back far more often.</p>
+    <p>By the fourth quarter the lines come together. With little time left, the score matters more than the talent gap.</p>
+  </div>
+  <div class="wide">
+    <figure class="fig-card">
+      <div class="fig-title">How often an 8- to 12-point lead held, by who had it</div>
+      <div class="legend" id="who-legend"></div>
+      <div class="scroll"><svg id="who" role="img" aria-labelledby="who-desc"><desc id="who-desc">Line chart of how often an 8 to 12 point lead held at each minute mark, for leaders who were pregame favorites, even matchups, and underdogs. The favorite line stays highest; all three converge near 100 percent in the final minutes.</desc></svg></div>
+      <figcaption>Favorite: the leading team had a 65% or better pregame chance. Underdog: 35% or less. Minutes with fewer than 40 qualifying games are skipped.</figcaption>
+      <details><summary>Show the numbers as a table</summary><div class="scroll" id="who-table"></div></details>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="rp-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">When the math was wrong</p>
+    <h2 id="rp-h">Four comebacks, play by play</h2>
+    <p>A 1% chance is not zero. In these four seasons, 89 teams won a game after the model gave them less than a 1% chance, about one a week during the season. Pick a game to replay it: the top chart is the score margin, the bottom is the comeback team's chance to win at each moment.</p>
+  </div>
+  <div class="wide">
+    <figure class="fig-card">
+      <div class="tabs" id="rp-tabs" role="group" aria-label="Choose a game"></div>
+      <div class="rp-head"><div><div class="rp-score" id="rp-score"></div><p class="rp-note" id="rp-note"></p></div><div class="legend" id="rp-legend"></div></div>
+      <div class="scroll"><svg id="rp" role="img" aria-labelledby="rp-desc"><desc id="rp-desc"></desc></svg></div>
+      <figcaption>Hover or tap along the chart to see the score at any moment. Win probability uses the same model as the calculator, starting from ESPN's pregame forecast.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="b1g-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">The Big Ten</p>
+    <h2 id="b1g-h">Who closes, and who comes back</h2>
+    <p>Since the Big Ten grew to 18 teams in 2024-25, each team has had dozens of chances to protect a double-digit lead and dozens of chances to erase one. The chart puts both on one map.</p>
+    <p>UCLA almost never trailed by 10 and never lost a 10-point lead. Purdue protected 10-point leads about as well as the conference middle, but turned only one of 33 double-digit deficits into a win.</p>
+  </div>
+  <div class="wide">
+    <figure class="fig-card">
+      <div class="fig-title">Big Ten teams, 2024-25 and 2025-26, all games</div>
+      <div class="scroll"><svg id="b1g" role="img" aria-labelledby="b1g-desc"><desc id="b1g-desc">Scatter plot of 18 Big Ten teams. Horizontal: percent of 10-point leads held. Vertical: percent of 10-point deficits turned into wins. UCLA, Maryland and Ohio State sit top right. Purdue sits lowest on comebacks, near the middle on holding leads.</desc></svg></div>
+      <figcaption>Counts are small (8 to 69 games per team in each column), so a single game moves a team several points. These rates also reflect how good a team is, not only how it plays late.</figcaption>
+      <details><summary>Show the numbers as a table</summary><div class="scroll" id="b1g-table"></div></details>
+    </figure>
+  </div>
+  <div class="col" style="margin-top:32px">
+    <div class="callout">
+      <p class="eyebrow">Boiler up</p>
+      <p>Purdue's best comeback in this data came in the 2023 Big Ten Tournament. Down 18 to Wisconsin, with a 12% chance to win by the model's count, the Boilermakers rallied. Jayla Smith's three with 7 seconds left won it, 57-55. It is the fifth-largest comeback in a game between two Big Ten teams over these four seasons. Replay it above.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="top-h">
+  <div class="col sec-head prose">
+    <p class="eyebrow">The record book</p>
+    <h2 id="top-h">The biggest comebacks, <span style="white-space:nowrap">2022‑23</span> to <span style="white-space:nowrap">2025‑26</span></h2>
+  </div>
+  <div class="col"><div class="scroll" id="top-table"></div>
+  <p class="fig-sub" style="margin-top:10px;font-size:14px;color:var(--muted)">Largest deficit at any point in the game, including overtime. <span class="chip b1g">B1G</span> marks a game between two Big Ten teams.</p></div>
+</section>
+
+<section class="wrap" aria-labelledby="meth-h">
+  <div class="col method prose">
+    <p class="eyebrow">How this was made</p>
+    <h2 id="meth-h">Methods and sources</h2>
+    <h3>Data</h3>
+    <p>Play-by-play, team box scores and schedules from the <a href="https://btaa.org/technology/love-data-week">2027 Love Data Week NCAA Women's Basketball data set</a> (Big Ten Academic Alliance), sourced from ESPN and processed by the <a href="https://github.com/sportsdataverse/wehoop">SportsDataverse wehoop</a> project. Four seasons, 2022-23 through 2025-26, regular season and postseason.</p>
+    <p>Two supplements come from the public wehoop release of the same plays. First, ESPN's pregame win probability, which the BTAA file does not include. Second, corrected running scores: ESPN's raw feed, which the BTAA file carries, sometimes logs free throws out of order, so the score flickers by a point or two. That affects 17,678 of 8.6 million plays and creates comebacks that never happened. Oklahoma's 100-46 win over Coppin State, for example, would show a 28-point comeback, though Coppin State never led. Apart from those scores, every play, game and final score matches the BTAA file exactly.</p>
+    <h3>Cleaning</h3>
+    <ul>
+      <li>Kept games marked complete whose play-by-play has all four quarters, more than 200 plays, and a final score matching the official result: <span class="num" id="m-games2">22,707</span> of the 23,400 completed games in the official data set (97%). Every kept game matches the official final score and teams.</li>
+      <li>Read the score at every whole minute of regulation. "Held" means the team ahead at that moment won the game, overtime included.</li>
+      <li>Checked comebacks against ESPN's box-score "largest lead" field. All the comebacks named on this page agree. In 31 games (0.1%), the play-by-play and box score differ by a few points on the largest lead; none appears on this page, and none falls in the Big Ten chart's seasons.</li>
+    </ul>
+    <h3>The model</h3>
+    <p class="num" id="m-formula"></p>
+    <ul>
+      <li>Fit by logistic regression on <span id="m-train"></span> minute-by-minute game states from 2022-23 to 2024-25. Tested on <span id="m-test"></span> held-out games from 2025-26.</li>
+      <li>On the test season, the model's Brier score was <span id="m-brier"></span>, compared with <span id="m-brier0"></span> for the pregame forecast alone (lower is better). When it said 85%, teams won 86% of the time.</li>
+      <li>About 2,250 games had no real pregame forecast (ESPN's placeholder value of 58.6%). They count in "All games" but are left out of the model and the matchup groups.</li>
+    </ul>
+    <h3>Limits</h3>
+    <ul>
+      <li>These are patterns, not causes. A team's comeback rate reflects its overall strength as much as anything it does late in games.</li>
+      <li>Team-level counts are small. Treat differences of a few percentage points between Big Ten teams as noise.</li>
+      <li>The model ignores possession, fouls and timeouts. Under 2 minutes, those matter.</li>
+    </ul>
+    <details><summary>Model calibration on 2025-26 (held out)</summary><div class="scroll" id="cal-table"></div></details>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div class="col">
+    <p><strong style="color:var(--ink)">Is the Lead Safe?</strong> An entry in Purdue's Boiler Up, Hammer Data Challenge, Love Data Week 2027.</p>
+    <p>By <span id="author">Mohammed Abir Mahdi</span>, Purdue University. Data: BTAA 2027 Love Data Week NCAA Women's Basketball data set (ESPN via SportsDataverse wehoop), with pregame forecasts and corrected running scores from the public wehoop release.</p>
+  </div>
+</footer>
+
+<div class="tip" id="tip" hidden></div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function(){
+"use strict";
+const D = JSON.parse(document.getElementById('data').textContent);
+const M = D.model, EV = D.evidence;
+const $ = s => document.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+const fmt = n => Number(n).toLocaleString('en-US');
+const pct = (p, d=0) => (100*p).toFixed(d) + '%';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const logit = p => Math.log(p/(1-p));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const isDark = () => css('--mode') === 'dark';
+
+function wp(lead, t, pre){ pre = clamp(pre, .005, .995); const z = M.bm*lead/Math.sqrt(t+M.c) + M.bp*logit(pre)*(t/40); return 1/(1+Math.exp(-z)); }
+function lead95(t, pre){ for (let L=1; L<=45; L++) if (wp(L,t,pre==null?.5:pre) >= .95) return L; return null; }
+function bucketOf(pre){ return pre >= .65 ? 'fav' : pre <= .35 ? 'dog' : 'even'; }
+function ev(b, t, l){ const x = EV[b] && EV[b][t] && EV[b][t][l]; return x ? {n:x[0], held:x[1]} : {n:0, held:0}; }
+
+function el(tag, attrs, parent){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function txt(parent, x, y, s, cls, anchor, extra){ const t = el('text', Object.assign({x, y, class: cls||'ax', 'text-anchor': anchor||'start'}, extra||{}), parent); t.textContent = s; return t; }
+
+function clockLabel(t){
+  const e = 40 - t;
+  if (e % 10 === 0) return {main: e === 20 ? 'Halftime' : 'End of Q' + (e/10), sub: t + ' MIN LEFT'};
+  const q = Math.floor(e/10) + 1, left = 10 - (e % 10);
+  return {main: 'Q' + q + ' ' + left + ':00', sub: t + ' MIN LEFT'};
+}
+function clockPhrase(t){
+  const e = 40 - t;
+  if (e === 20) return 'at halftime';
+  if (e % 10 === 0) return 'after ' + ['','the first','the second','the third'][e/10] + ' quarter';
+  if (t < 10) return 'with ' + t + ':00 left';
+  return 'with ' + t + ' minutes left';
+}
+
+/* tooltip */
+const tip = $('#tip');
+function showTip(html, x, y){ tip.innerHTML = html; tip.hidden = false; const w = tip.offsetWidth, h = tip.offsetHeight; let L = x + 14, T = y + 14; if (L + w > innerWidth - 8) L = x - w - 14; if (T + h > innerHeight - 8) T = y - h - 14; tip.style.left = Math.max(8, L) + 'px'; tip.style.top = Math.max(8, T) + 'px'; }
+function hideTip(){ tip.hidden = true; }
+
+/* ---------- meta ---------- */
+const nGames = +D.meta.games;
+$('#m-games').textContent = fmt(nGames); $('#m-games2').textContent = fmt(nGames);
+
+/* ---------- calculator ---------- */
+const iL = $('#in-lead'), iM = $('#in-min'), iP = $('#in-pre');
+const dots = $('#dots');
+for (let i = 0; i < 100; i++) dots.appendChild(document.createElement('i'));
+function renderCalc(){
+  const L = +iL.value, t = +iM.value, pre = +iP.value/100;
+  const p = wp(L, t, pre), k = Math.round(p*100);
+  $('#o-lead').innerHTML = L + '<small>PT' + (L>1?'S':'') + '</small>';
+  const c = clockLabel(t); $('#o-min').innerHTML = c.main + '<small>' + c.sub + '</small>';
+  const tag = pre >= .65 ? 'FAVORITE' : pre <= .35 ? 'UNDERDOG' : 'EVEN MATCHUP';
+  $('#o-pre').innerHTML = Math.round(pre*100) + '%<small>' + tag + '</small>';
+  const shown = p > .995 ? '>99' : p < .005 ? '<1' : String(k);
+  $('#o-pct').innerHTML = shown + '<sup>%</sup>';
+  const who = pre >= .65 ? 'a favorite' : pre <= .35 ? 'an underdog' : 'a team in an even matchup';
+  $('#o-verdict').textContent = 'Up ' + L + ' ' + clockPhrase(t) + ', ' + who + ' wins about ' + (p > .995 ? 'every' : k + ' of 100') + ' time' + (p > .995 ? '' : 's') + '.';
+  [...dots.children].forEach((d, i) => d.classList.toggle('on', i < k));
+  dots.setAttribute('aria-label', k + ' of 100 dots filled');
+  const need = lead95(t, pre);
+  $('#o-need').innerHTML = need == null ? 'No lead under 45 is 95% safe here.' : 'Lead needed to be 95% safe now: <b>' + need + '</b>' + (L >= need ? ' · you have it' : ' · ' + (need - L) + ' more');
+  const b = bucketOf(pre), e1 = ev(b, t, L), ea = ev('all', t, L);
+  const label = {fav:'favorites', dog:'underdogs', even:'evenly matched teams'}[b];
+  let s = '';
+  if (e1.n >= 30) s += 'In the data, <b>' + fmt(e1.n) + '</b> ' + label + ' were up ' + L + ' ' + clockPhrase(t) + '. <b>' + fmt(e1.held) + '</b> held on (' + pct(e1.held/e1.n) + ').';
+  else s += 'Fewer than 30 ' + label + ' were in exactly this spot, too few to check.';
+  if (ea.n >= 30) s += ' Across all games: ' + fmt(ea.held) + ' of ' + fmt(ea.n) + ' (' + pct(ea.held/ea.n) + ').';
+  $('#o-evid').innerHTML = s;
+}
+[iL, iM, iP].forEach(i => i.addEventListener('input', renderCalc));
+$('#presets').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; iL.value = b.dataset.l; iM.value = b.dataset.m; iP.value = b.dataset.p; renderCalc(); });
+renderCalc();
+
+/* text numbers from data */
+{ const a = ev('all', 20, 10), b = ev('all', 2, 10); $('#t-10h').textContent = pct(a.held/a.n); $('#t-10-2').textContent = pct(b.held/b.n, 1); }
+
+/* ---------- sequential ramp ---------- */
+const RAMP = ['#cde2fb','#b7d3f6','#9ec5f4','#86b6ef','#6da7ec','#5598e7','#3987e5','#2a78d6','#256abf','#1c5cab','#184f95','#104281','#0d366b'];
+function hex2rgb(h){ return [1,3,5].map(i => parseInt(h.slice(i,i+2),16)); }
+function rampColor(v){ // v in [0,1]
+  const r = isDark() ? RAMP.slice(0, 11).reverse() : RAMP; // dark: low recedes into the dark surface
+  const x = clamp(v,0,1)*(r.length-1), i = Math.floor(x), f = x - i;
+  const a = hex2rgb(r[i]), b = hex2rgb(r[Math.min(i+1, r.length-1)]);
+  return 'rgb(' + a.map((c,j) => Math.round(c + (b[j]-c)*f)).join(',') + ')';
+}
+function paintRampLegend(){ const r = $('#ramp'); r.style.background = 'linear-gradient(90deg,' + [0,.25,.5,.75,1].map(rampColor).join(',') + ')'; }
+
+/* ---------- safety map ---------- */
+let mapMode = 'all';
+function cellStat(t, l){
+  if (mapMode === 'all') return ev('all', t, l);
+  return ev('even', t, l);
+}
+function renderMap(){
+  const svg = $('#map'); svg.querySelectorAll(':scope > :not(desc)').forEach(n => n.remove());
+  const T = []; for (let t = 39; t >= 1; t--) T.push(t);
+  const LMAX = 25, cw = 20, ch = 15, ml = 46, mt = 14, mb = 50, mr = 14;
+  const W = ml + T.length*cw + mr, H = mt + LMAX*ch + mb;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H);
+  svg.style.minWidth = '640px'; svg.style.width = '100%'; svg.style.height = 'auto';
+  const defs = el('defs', {}, svg);
+  const pat = el('pattern', {id:'hatch', width:6, height:6, patternUnits:'userSpaceOnUse', patternTransform:'rotate(45)'}, defs);
+  el('rect', {width:6, height:6, fill:css('--surface')}, pat); el('rect', {width:3, height:6, fill:css('--grid')}, pat);
+  const g = el('g', {}, svg);
+  const X = t => ml + (39 - t)*cw, Y = l => mt + (LMAX - l)*ch;
+  for (const t of T) for (let l = 1; l <= LMAX; l++){
+    const s = cellStat(t, l), ok = s.n >= 30, p = ok ? s.held/s.n : null;
+    const r = el('rect', {x: X(t)+1, y: Y(l)+1, width: cw-2, height: ch-2, rx: 2, fill: ok ? rampColor((p-.5)/.5) : 'url(#hatch)'}, g);
+    r.dataset.t = t; r.dataset.l = l;
+  }
+  // quarter separators
+  [30, 20, 10].forEach(t => el('line', {x1: X(t)+cw/2+ (cw/2), x2: X(t)+cw, y1: mt-4, y2: mt + LMAX*ch, stroke: css('--line'), 'stroke-width': 1}, svg));
+  // x axis
+  [39,35,30,25,20,15,10,5,1].forEach(t => txt(svg, X(t)+cw/2, mt + LMAX*ch + 16, String(t), 'ax', 'middle'));
+  [['Q1',35],['Q2',25],['Q3',15],['Q4',5]].forEach(([q,t]) => txt(svg, X(t)+cw/2, mt + LMAX*ch + 33, q, 'ax', 'middle', {style:'font-weight:600'}));
+  txt(svg, ml + T.length*cw, mt + LMAX*ch + 47, 'Minutes left in the game →', 'ax', 'end');
+  [1,5,10,15,20,25].forEach(l => txt(svg, ml - 8, Y(l)+ch/2+4, String(l), 'ax', 'end'));
+  txt(svg, 12, mt + LMAX*ch/2, 'Lead (points)', 'ax', 'middle', {transform: 'rotate(-90 12 ' + (mt + LMAX*ch/2) + ')'});
+  // 95% line (even matchup model): continuous, lead value at center of each minute column
+  let d = '';
+  for (let t = 39; t >= 1; t -= .25){ const L = 2.944/M.bm*Math.sqrt(t + M.c); if (L > LMAX) continue; const x = ml + (39 - t)*cw + cw/2, y = mt + (LMAX - L)*ch + ch/2; d += (d ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }
+  el('path', {d, fill:'none', stroke: css('--surface'), 'stroke-width': 5, 'stroke-linecap':'round'}, svg);
+  el('path', {d, fill:'none', stroke: css('--accent'), 'stroke-width': 2.5, 'stroke-linecap':'round'}, svg);
+  const lx = X(16)+cw/2, ly = mt + (LMAX - 2.944/M.bm*Math.sqrt(16+M.c))*ch + ch/2;
+  const lab = txt(svg, lx + 4, ly - 12, '95% safe', 'lab halo', 'start'); lab.style.fill = css('--accent-ink');
+  // hover
+  g.addEventListener('pointermove', e => { const r = e.target.closest('rect'); if (!r) return hideTip(); const t = +r.dataset.t, l = +r.dataset.l, s = cellStat(t, l);
+    const body = s.n >= 30 ? '<b>' + pct(s.held/s.n,1) + '</b> held · ' + fmt(s.held) + ' of ' + fmt(s.n) : 'Only ' + s.n + ' games';
+    showTip('<div>Up <b>' + l + '</b> ' + clockPhrase(t) + '</div><div>' + body + '</div><div class="t-m">' + (mapMode==='all' ? 'All games' : 'Evenly matched') + '</div>', e.clientX, e.clientY); });
+  g.addEventListener('pointerleave', hideTip);
+  // table
+  const leads = [3,5,8,10,12,15,20], times = [35,30,20,15,10,5,3,2,1];
+  let h = '<table><thead><tr><th>Lead</th>' + times.map(t => '<th class="r">' + t + ' min</th>').join('') + '</tr></thead><tbody>';
+  for (const l of leads){ h += '<tr><td>' + l + ' pts</td>' + times.map(t => { const s = cellStat(t,l); return '<td class="r">' + (s.n>=30 ? pct(s.held/s.n) : '–') + '</td>'; }).join('') + '</tr>'; }
+  $('#map-table').innerHTML = h + '</tbody></table>';
+}
+document.querySelectorAll('#fig-map .seg button').forEach(b => b.addEventListener('click', () => { mapMode = b.dataset.mode; document.querySelectorAll('#fig-map .seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); renderMap(); }));
+
+/* ---------- square-root rule ---------- */
+function renderRule(){
+  const spots = [[20,'Halftime'],[10,'10:00 left'],[5,'5:00 left'],[2,'2:00 left'],[1,'1:00 left']];
+  $('#rule').innerHTML = spots.map(([t, w]) => { const L = 3.7*Math.sqrt(t); return '<div class="r-cell"><span class="when">' + w + '</span><span class="pts">' + lead95(t, .5) + '<small>pts</small></span></div>'; }).join('');
+  // empirical check of the rule in even games: leads at/above rule
+  let n = 0, h = 0; for (let t = 1; t <= 39; t++){ const need = lead95(t, .5); for (let l = need; l <= 30; l++){ const s = ev('even', t, l); n += s.n; h += s.held; } }
+  $('#rule-check').textContent = 'Check against the raw data: in evenly matched games, teams whose lead met the rule went on to win ' + pct(h/n,1) + ' of the time (' + fmt(n) + ' game moments).';
+}
+
+/* ---------- who's leading ---------- */
+function pooled(b, t){ let n = 0, h = 0; for (let l = 8; l <= 12; l++){ const s = ev(b, t, l); n += s.n; h += s.held; } return {n, h, p: n ? h/n : null}; }
+const WHO = [['fav','Favorite led','--s1'],['even','Even matchup','--s3'],['dog','Underdog led','--s2']];
+function renderWho(){
+  const svg = $('#who'); svg.querySelectorAll(':scope > :not(desc)').forEach(n => n.remove());
+  const W = 900, H = 360, ml = 48, mr = 24, mt = 16, mb = 46;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.style.minWidth = '600px'; svg.style.width = '100%'; svg.style.height = 'auto';
+  const series = WHO.map(([b, name, c]) => ({b, name, c: css(c), pts: [...Array(39)].map((_, i) => { const t = 39 - i; const s = pooled(b, t); return {t, ...s}; }).filter(d => d.n >= 40)}));
+  const lo = Math.floor(Math.min(...series.flatMap(s => s.pts.map(d => d.p))) * 10) / 10;
+  const X = t => ml + (39 - t)/(38)*(W - ml - mr), Y = p => mt + (1 - (p - lo)/(1 - lo))*(H - mt - mb);
+  for (let v = lo; v <= 1.0001; v += .1){ el('line', {x1: ml, x2: W - mr, y1: Y(v), y2: Y(v), stroke: css('--grid')}, svg); txt(svg, ml - 8, Y(v)+4, Math.round(v*100) + '%', 'ax', 'end'); }
+  [39,35,30,25,20,15,10,5,1].forEach(t => txt(svg, X(t), H - mb + 18, String(t), 'ax', 'middle'));
+  [30,20,10].forEach(t => el('line', {x1: X(t), x2: X(t), y1: mt, y2: H - mb, stroke: css('--line'), 'stroke-dasharray':'3 3'}, svg));
+  txt(svg, X(20), mt + 12, 'Half', 'ax', 'middle', {dy: 0, style:'font-weight:600'});
+  txt(svg, W - mr, H - 8, 'Minutes left in the game →', 'ax', 'end');
+  const ends = [];
+  for (const s of series){
+    const d = s.pts.map((p, i) => (i ? 'L' : 'M') + X(p.t).toFixed(1) + ' ' + Y(p.p).toFixed(1)).join('');
+    el('path', {d, fill:'none', stroke: s.c, 'stroke-width': 2, 'stroke-linejoin':'round'}, svg);
+    const last = s.pts.find(p => p.t === 30) || s.pts[0];
+    ends.push({s, y: Y(s.pts[s.pts.length-1].p)});
+  }
+  // direct labels at the start (left), staggered to avoid collision
+  const starts = series.map(s => ({s, y: Y(s.pts[0].p)})).sort((a,b) => a.y - b.y);
+  for (let i = 1; i < starts.length; i++) if (starts[i].y - starts[i-1].y < 16) starts[i].y = starts[i-1].y + 16;
+  // place labels at right side after line end? Use mid-early point t=30
+  const lbl = series.map(s => { const p = s.pts.find(q => q.t === 24) || s.pts[2]; return {s, x: X(p.t), y: Y(p.p)}; });
+  lbl.sort((a,b) => a.y - b.y); for (let i = 1; i < lbl.length; i++) if (lbl[i].y - lbl[i-1].y < 18) lbl[i].y = lbl[i-1].y + 18;
+  lbl.forEach(o => { const t = txt(svg, o.x, o.y - 10, o.s.name, 'lab halo', 'middle'); });
+  // hover crosshair
+  const cross = el('line', {y1: mt, y2: H - mb, stroke: css('--muted'), 'stroke-width': 1, visibility:'hidden'}, svg);
+  const marks = series.map(s => el('circle', {r: 5, fill: s.c, stroke: css('--surface'), 'stroke-width': 2, visibility:'hidden'}, svg));
+  const hit = el('rect', {x: ml, y: mt, width: W - ml - mr, height: H - mt - mb, fill: 'transparent'}, svg);
+  hit.addEventListener('pointermove', e => {
+    const r = svg.getBoundingClientRect(), sx = (e.clientX - r.left) * W / r.width;
+    const t = clamp(Math.round(39 - (sx - ml)/(W - ml - mr)*38), 1, 39);
+    cross.setAttribute('x1', X(t)); cross.setAttribute('x2', X(t)); cross.setAttribute('visibility','visible');
+    let html = '<div><b>' + t + ' min left</b></div>';
+    series.forEach((s, i) => { const p = s.pts.find(q => q.t === t); if (p){ marks[i].setAttribute('cx', X(t)); marks[i].setAttribute('cy', Y(p.p)); marks[i].setAttribute('visibility','visible'); html += '<div>' + s.name + ': <b>' + pct(p.p) + '</b> <span class="t-m">(' + fmt(p.n) + ')</span></div>'; } else marks[i].setAttribute('visibility','hidden'); });
+    showTip(html, e.clientX, e.clientY);
+  });
+  hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility','hidden'); marks.forEach(m => m.setAttribute('visibility','hidden')); hideTip(); });
+  $('#who-legend').innerHTML = series.map(s => '<span><i class="sw line" style="background:' + s.c + '"></i>' + s.name + '</span>').join('');
+  const times = [35,30,25,20,15,10,5,2];
+  $('#who-table').innerHTML = '<table><thead><tr><th>Leader</th>' + times.map(t => '<th class="r">' + t + ' min</th>').join('') + '</tr></thead><tbody>' + series.map(s => '<tr><td>' + s.name + '</td>' + times.map(t => { const p = s.pts.find(q => q.t === t); return '<td class="r">' + (p ? pct(p.p) : '–') + '</td>'; }).join('') + '</tr>').join('') + '</tbody></table>';
+}
+
+/* ---------- replays ---------- */
+const RP_ORDER = ['401516439','401825269','401516447','401724590'];
+const RP_TXT = {
+  '401516439': {tab:'Purdue vs Wisconsin', sub:'2023 Big Ten Tournament', note:'Purdue, a pregame favorite, fell behind by 18 in the second quarter. Wisconsin still led 55-54 after a three with 11 seconds left. Jayla Smith answered with a three at 0:07, and Purdue held on.'},
+  '401825269': {tab:'Purdue vs Washington', sub:'Jan 11, 2026 · overtime', note:'Purdue started as a 25% underdog and trailed by 13. The Boilermakers forced overtime and outscored Washington in the extra period.'},
+  '401516447': {tab:'Ohio State vs Indiana', sub:'2023 Big Ten Tournament', note:'The largest comeback in a Big Ten conference game in these four seasons. Indiana led by 24 in the semifinal before Ohio State came all the way back.'},
+  '401724590': {tab:'Pitt vs SMU', sub:'Jan 12, 2025 · biggest in the data', note:'Pitt trailed SMU by 31 at halftime and by 32 at the worst point, then won by 13. Its chance to win bottomed out near 1 in 370.'}
+};
+const short = n => n.replace(/ (Boilermakers|Badgers|Huskies|Buckeyes|Hoosiers|Panthers|Mustangs)$/, '').replace('Pittsburgh','Pitt');
+let rpCur = RP_ORDER[0];
+function renderTabs(){
+  const box = $('#rp-tabs'); box.innerHTML = '';
+  RP_ORDER.forEach(id => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(id === rpCur)); b.innerHTML = RP_TXT[id].tab + '<small>' + RP_TXT[id].sub + '</small>'; b.addEventListener('click', () => { rpCur = id; renderTabs(); renderReplay(); }); box.appendChild(b); });
+}
+function renderReplay(){
+  const g = D.replays.find(r => r.id === rpCur), X0 = RP_TXT[rpCur];
+  const homeWon = g.hf > g.af, winner = short(homeWon ? g.home : g.away), loser = short(homeWon ? g.away : g.home);
+  const wf = homeWon ? g.hf : g.af, lf = homeWon ? g.af : g.hf;
+  $('#rp-score').textContent = winner + ' ' + wf + ', ' + loser + ' ' + lf + (g.periods > 4 ? ' (OT)' : '');
+  $('#rp-note').textContent = X0.note;
+  const cW = css('--s1'), cL = css('--s2');
+  $('#rp-legend').innerHTML = '<span><i class="sw" style="background:' + cW + '"></i>' + winner + ' ahead</span><span><i class="sw" style="background:' + cL + '"></i>' + loser + ' ahead</span>';
+  const svg = $('#rp'); svg.querySelectorAll(':scope > :not(desc)').forEach(n => n.remove());
+  const endX = g.periods > 4 ? 40 + 5*(g.periods - 4) : 40;
+  const W = 900, ml = 48, mr = 16, top1 = 12, h1 = 190, gap = 46, h2 = 120, mb = 44, H = top1 + h1 + gap + h2 + mb;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.style.minWidth = '600px'; svg.style.width = '100%'; svg.style.height = 'auto';
+  const pts = g.pts.map(p => ({x: p[0], m: homeWon ? p[1] : -p[1], wp: homeWon ? p[2] : 1 - p[2], h: p[3], a: p[4], per: p[5], clock: p[6]}));
+  const mmax = Math.max(10, Math.ceil(Math.max(...pts.map(p => Math.abs(p.m))) / 5) * 5);
+  const X = x => ml + x/endX*(W - ml - mr), Y1 = m => top1 + (1 - (m + mmax)/(2*mmax))*h1, y2top = top1 + h1 + gap, Y2 = p => y2top + (1 - p)*h2;
+  // grid panel 1
+  for (let v = -mmax; v <= mmax; v += mmax/2){ el('line', {x1: ml, x2: W - mr, y1: Y1(v), y2: Y1(v), stroke: v === 0 ? css('--muted') : css('--grid'), 'stroke-width': v === 0 ? 1 : 1}, svg); txt(svg, ml - 8, Y1(v) + 4, (v > 0 ? '+' : '') + v, 'ax', 'end'); }
+  txt(svg, ml, top1 - 0, '', 'ax');
+  // quarter lines
+  const qs = [10,20,30]; for (let k = 40; k < endX; k += 5) qs.push(k);
+  qs.concat([40]).forEach(q => { if (q >= endX) return; [[top1, top1+h1],[y2top, y2top+h2]].forEach(([a,b]) => el('line', {x1: X(q), x2: X(q), y1: a, y2: b, stroke: css('--line'), 'stroke-dasharray': '3 3'}, svg)); });
+  const qlab = [['Q1',5],['Q2',15],['Q3',25],['Q4',35]]; for (let k = 0; 40 + 5*k < endX; k++) qlab.push(['OT', 42.5 + 5*k]);
+  qlab.forEach(([q, x]) => txt(svg, X(x), H - mb + 18, q, 'ax', 'middle', {style:'font-weight:600'}));
+  // step path of margin, split into above/below zero fills via clip paths
+  let d = 'M' + X(0) + ' ' + Y1(0);
+  pts.forEach((p, i) => { if (i) d += 'H' + X(p.x).toFixed(1); d += 'V' + Y1(p.m).toFixed(1); });
+  d += 'H' + X(endX);
+  const area = d + 'V' + Y1(0) + 'Z';
+  const defs = el('defs', {}, svg);
+  const ca = el('clipPath', {id: 'clipA'}, defs); el('rect', {x: 0, y: 0, width: W, height: Y1(0)}, ca);
+  const cb = el('clipPath', {id: 'clipB'}, defs); el('rect', {x: 0, y: Y1(0), width: W, height: H}, cb);
+  el('path', {d: area, fill: cW, 'fill-opacity': .22, 'clip-path': 'url(#clipA)'}, svg);
+  el('path', {d: area, fill: cL, 'fill-opacity': .22, 'clip-path': 'url(#clipB)'}, svg);
+  el('path', {d, fill:'none', stroke: cW, 'stroke-width': 2, 'clip-path': 'url(#clipA)'}, svg);
+  el('path', {d, fill:'none', stroke: cL, 'stroke-width': 2, 'clip-path': 'url(#clipB)'}, svg);
+  txt(svg, ml + 4, top1 + 12, winner + ' ahead', 'ax', 'start');
+  txt(svg, ml + 4, top1 + h1 - 6, loser + ' ahead', 'ax', 'start');
+  // deficit annotation
+  const worst = pts.reduce((a, b) => b.m < a.m ? b : a);
+  el('circle', {cx: X(worst.x), cy: Y1(worst.m), r: 5, fill: cL, stroke: css('--surface'), 'stroke-width': 2}, svg);
+  const anchorRight = X(worst.x) > W*0.6;
+  txt(svg, X(worst.x) + (anchorRight ? -10 : 10), Y1(worst.m) + 4, 'Down ' + (-worst.m), 'lab halo', anchorRight ? 'end' : 'start');
+  // panel 2: win prob
+  [0,.5,1].forEach(v => { el('line', {x1: ml, x2: W - mr, y1: Y2(v), y2: Y2(v), stroke: v === .5 ? css('--muted') : css('--grid'), 'stroke-dasharray': v === .5 ? '4 4' : ''}, svg); txt(svg, ml - 8, Y2(v) + 4, Math.round(v*100) + '%', 'ax', 'end'); });
+  txt(svg, ml, y2top - 12, winner + "'s chance to win", 'lab', 'start');
+  const d2 = pts.map((p, i) => (i ? 'L' : 'M') + X(p.x).toFixed(1) + ' ' + Y2(p.wp).toFixed(1)).join('');
+  el('path', {d: d2, fill: 'none', stroke: cW, 'stroke-width': 2, 'stroke-linejoin':'round'}, svg);
+  const low = pts.slice(0, -1).reduce((a, b) => b.wp < a.wp ? b : a);
+  el('circle', {cx: X(low.x), cy: Y2(low.wp), r: 5, fill: cW, stroke: css('--surface'), 'stroke-width': 2}, svg);
+  const lowTxt = low.wp < .01 ? (low.wp*100).toFixed(1) + '%' : Math.round(low.wp*100) + '%';
+  const lr = X(low.x) > W*0.6;
+  txt(svg, X(low.x) + (lr ? -10 : 10), Y2(low.wp) - 8, 'Low point: ' + lowTxt, 'lab halo', lr ? 'end' : 'start');
+  $('#rp-desc').textContent = winner + ' beat ' + loser + ' ' + wf + ' to ' + lf + ' after trailing by ' + (-worst.m) + '. Its chance to win fell as low as ' + lowTxt + '.';
+  // hover
+  const cross = el('line', {y1: top1, y2: y2top + h2, stroke: css('--muted'), visibility: 'hidden'}, svg);
+  const dot1 = el('circle', {r: 4, fill: css('--ink'), visibility: 'hidden'}, svg), dot2 = el('circle', {r: 4, fill: css('--ink'), visibility: 'hidden'}, svg);
+  const hit = el('rect', {x: ml, y: top1, width: W - ml - mr, height: y2top + h2 - top1, fill: 'transparent'}, svg);
+  const per = p => p.per <= 4 ? 'Q' + p.per : 'OT' + (p.per > 5 ? p.per - 4 : '');
+  hit.addEventListener('pointermove', e => {
+    const r = svg.getBoundingClientRect(), x = ((e.clientX - r.left) * W / r.width - ml) / (W - ml - mr) * endX;
+    let p = pts[0]; for (const q of pts){ if (q.x <= x) p = q; else break; }
+    cross.setAttribute('x1', X(x)); cross.setAttribute('x2', X(x)); cross.setAttribute('visibility', 'visible');
+    dot1.setAttribute('cx', X(x)); dot1.setAttribute('cy', Y1(p.m)); dot1.setAttribute('visibility', 'visible');
+    dot2.setAttribute('cx', X(x)); dot2.setAttribute('cy', Y2(p.wp)); dot2.setAttribute('visibility', 'visible');
+    const ws = homeWon ? p.h : p.a, ls = homeWon ? p.a : p.h;
+    showTip('<div class="t-m">' + per(p) + ' · ' + p.clock + '</div><div>' + winner + ' <b>' + ws + '</b>, ' + loser + ' <b>' + ls + '</b></div><div>' + winner + ' win chance: <b>' + (p.wp < .01 ? (p.wp*100).toFixed(1) : Math.round(p.wp*100)) + '%</b></div>', e.clientX, e.clientY);
+  });
+  hit.addEventListener('pointerleave', () => { [cross, dot1, dot2].forEach(n => n.setAttribute('visibility', 'hidden')); hideTip(); });
+}
+
+/* ---------- Big Ten scatter ---------- */
+const b1gShort = n => n.replace(/ (Bruins|Terrapins|Buckeyes|Hawkeyes|Spartans|Wolverines|Huskies|Trojans|Cornhuskers|Ducks|Golden Gophers|Badgers|Hoosiers|Wildcats|Fighting Illini|Lady Lions|Scarlet Knights|Boilermakers)$/, '');
+function renderB1G(){
+  const svg = $('#b1g'); svg.querySelectorAll(':scope > :not(desc)').forEach(n => n.remove());
+  const W = 900, H = 460, ml = 56, mr = 24, mt = 20, mb = 56;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.style.minWidth = '560px'; svg.style.width = '100%'; svg.style.height = 'auto';
+  const T = D.bigten.map(r => ({...r, name: b1gShort(r.team), pu: /Purdue/.test(r.team)}));
+  const x0 = 75, x1 = 100, y0 = 0, y1 = 55;
+  const X = v => ml + (v - x0)/(x1 - x0)*(W - ml - mr), Y = v => mt + (1 - (v - y0)/(y1 - y0))*(H - mt - mb);
+  for (let v = 75; v <= 100; v += 5){ el('line', {x1: X(v), x2: X(v), y1: mt, y2: H - mb, stroke: css('--grid')}, svg); txt(svg, X(v), H - mb + 18, v + '%', 'ax', 'middle'); }
+  for (let v = 0; v <= 50; v += 10){ el('line', {x1: ml, x2: W - mr, y1: Y(v), y2: Y(v), stroke: css('--grid')}, svg); txt(svg, ml - 8, Y(v) + 4, v + '%', 'ax', 'end'); }
+  txt(svg, W - mr, H - 12, 'Share of 10-point leads held →', 'ax', 'end', {style:'font-weight:600'});
+  txt(svg, ml, mt - 6, '↑ Share of 10-point deficits turned into wins', 'ax', 'start', {style:'font-weight:600'});
+  const med = a => { const s = [...a].sort((p,q) => p-q); return (s[8] + s[9])/2; };
+  const mx = med(T.map(r => r.held_pct)), my = med(T.map(r => r.comeback_pct));
+  el('line', {x1: X(mx), x2: X(mx), y1: mt, y2: H - mb, stroke: css('--line'), 'stroke-dasharray': '4 4'}, svg);
+  el('line', {x1: ml, x2: W - mr, y1: Y(my), y2: Y(my), stroke: css('--line'), 'stroke-dasharray': '4 4'}, svg);
+  txt(svg, W - mr - 4, Y(my) - 6, 'Big Ten median', 'ax', 'end');
+  const labelSet = new Set(['UCLA','Maryland','Ohio State','Washington','Penn State','Rutgers','Purdue','Northwestern','Michigan State']);
+  const offs = {UCLA:[-8,-10,'end'], Maryland:[10,4,'start'], 'Ohio State':[10,4,'start'], Washington:[10,4,'start'], 'Penn State':[10,-2,'start'], Rutgers:[10,12,'start'], Purdue:[12,5,'start'], Northwestern:[-10,4,'end'], 'Michigan State':[10,4,'start']};
+  const g = el('g', {}, svg);
+  T.filter(r => !r.pu).concat(T.filter(r => r.pu)).forEach(r => {
+    const cx = X(r.held_pct), cy = Y(r.comeback_pct);
+    const c = el('circle', {cx, cy, r: r.pu ? 9 : 7, fill: r.pu ? css('--gold-fill') : css('--s1'), 'fill-opacity': r.pu ? 1 : .85, stroke: r.pu ? css('--ink') : css('--surface'), 'stroke-width': 2}, g);
+    c.dataset.team = r.team;
+    if (labelSet.has(r.name)){ const o = offs[r.name]; const t = txt(svg, cx + o[0], cy + o[1], r.name, r.pu ? 'lab' : 'ax', o[2]); if (r.pu){ t.style.fontSize = '15px'; } else t.style.fill = css('--ink-2'); }
+  });
+  // hit targets bigger than marks
+  T.forEach(r => { const h = el('circle', {cx: X(r.held_pct), cy: Y(r.comeback_pct), r: 16, fill: 'transparent'}, svg);
+    h.addEventListener('pointermove', e => showTip('<div><b>' + r.team + '</b></div><div>Held ' + (r.led10_games - r.blown_10) + ' of ' + r.led10_games + ' ten-point leads (' + r.held_pct + '%)</div><div>Won ' + r.comeback_wins_10 + ' of ' + r.trailed10_games + ' games after trailing by 10 (' + r.comeback_pct + '%)</div><div class="t-m">Record ' + r.wins + '-' + (r.games - r.wins) + '</div>', e.clientX, e.clientY));
+    h.addEventListener('pointerleave', hideTip); });
+  const rows = [...T].sort((a,b) => b.comeback_pct - a.comeback_pct);
+  $('#b1g-table').innerHTML = '<table><thead><tr><th>Team</th><th class="r">Record</th><th class="r">10-pt leads held</th><th class="r">10-pt deficits won</th></tr></thead><tbody>' + rows.map(r => '<tr' + (r.pu ? ' class="pu"' : '') + '><td>' + r.name + '</td><td class="r">' + r.wins + '-' + (r.games - r.wins) + '</td><td class="r">' + (r.led10_games - r.blown_10) + ' of ' + r.led10_games + ' (' + r.held_pct + '%)</td><td class="r">' + r.comeback_wins_10 + ' of ' + r.trailed10_games + ' (' + r.comeback_pct + '%)</td></tr>').join('') + '</tbody></table>';
+}
+
+/* ---------- top comebacks table ---------- */
+function seasonLabel(s){ s = +s; return (s-1) + '-' + String(s).slice(2); }
+function renderTop(){
+  const rows = D.top.slice(0, 10);
+  const date = s => new Date(s + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  $('#top-table').innerHTML = '<table><thead><tr><th>Date</th><th>Winner</th><th>Loser</th><th class="r">Final</th><th class="r">Trailed by</th></tr></thead><tbody>' + rows.map(r => {
+    const b1g = r.winner_conf === '7' && r.loser_conf === '7';
+    return '<tr><td class="num">' + date(r.game_date) + '</td><td>' + r.winner + (b1g ? ' <span class="chip b1g">B1G</span>' : '') + (+r.max_period > 4 ? ' <span class="chip">OT</span>' : '') + '</td><td>' + r.loser + '</td><td class="r">' + r.wpts + '-' + r.lpts + '</td><td class="r"><b>' + r.max_deficit + '</b></td></tr>';
+  }).join('') + '</tbody></table>';
+}
+
+/* ---------- methods ---------- */
+function renderMethods(){
+  $('#m-formula').innerHTML = 'Chance the home team wins = logistic( ' + M.bm.toFixed(2) + ' × margin ÷ √(minutes left + ' + M.c + ') + ' + M.bp.toFixed(2) + ' × pregame log-odds × minutes left ÷ 40 ). The pregame term fades to nothing by the final horn; the margin term grows as the clock runs down.';
+  $('#m-train').textContent = '602,840';
+  $('#m-test').textContent = fmt(M.test_games);
+  $('#m-brier').textContent = M.brier.toFixed(3); $('#m-brier0').textContent = M.brier_pre.toFixed(3);
+  $('#cal-table').innerHTML = '<table><thead><tr><th>Model said</th><th class="r">Game moments</th><th class="r">Average prediction</th><th class="r">Actually won</th></tr></thead><tbody>' + M.cal.map(c => '<tr><td>' + c.bin.split('-').map(v => Math.round(v*100) + '%').join(' to ') + '</td><td class="r">' + fmt(c.n) + '</td><td class="r">' + pct(c.pred, 1) + '</td><td class="r">' + pct(c.actual, 1) + '</td></tr>').join('') + '</tbody></table>';
+}
+
+function renderThemed(){ paintRampLegend(); renderMap(); renderWho(); renderReplay(); renderB1G(); }
+renderRule(); renderTabs(); renderTop(); renderMethods(); renderThemed();
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderThemed); } catch (e) {}
+new MutationObserver(renderThemed).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+const author = new URLSearchParams(location.search).get('by'); if (author) $('#author').textContent = author;
+})();
+</script>
