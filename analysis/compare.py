@@ -1,8 +1,8 @@
-"""Compare every page-stated figure between two pipeline runs (A = wehoop release, B = official BTAA pbp)."""
+"""Compare every page-stated figure between two pipeline runs (usage: python3 compare.py <wehoop_run_dir> <official_run_dir>)."""
 import json, subprocess, sys
-A = "/home/claude/wbb"; B = sys.argv[1]
+A, B = sys.argv[1], sys.argv[2]  # two pipeline output folders: wehoop run, official BTAA run
 def site(d): return json.load(open(f"{d}/web/data/site.json"))
-def q(d, sql): return subprocess.run([f"/home/claude/wbb/bin/duckdb", "-list", "-noheader", f"{d}/wbb.duckdb", "-c", sql], capture_output=True, text=True).stdout.strip()
+def q(d, sql): return subprocess.run(["duckdb", "-list", "-noheader", f"{d}/wbb.duckdb", "-c", sql], capture_output=True, text=True).stdout.strip()
 def ev(s, b, t, l): x = s["evidence"][b].get(str(t), {}).get(str(l)); return x
 def pct(x): return f"{100*x[1]/x[0]:.1f}% ({x[1]}/{x[0]})" if x else "-"
 rows = []
