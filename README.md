@@ -27,3 +27,7 @@ python3 build_site.py   # embed data -> site/index.html
 - 22,707 of 23,453 games kept (complete play-by-play whose final matches the official score).
 - Score read at each whole minute of regulation; "held" = team ahead went on to win.
 - Model: logistic( 0.79 × margin / √(minutes left + 0.5) + 1.05 × pregame log-odds × minutes left / 40 ), trained on 2022-23 to 2024-25 and tested on 2025-26 (Brier 0.112 vs 0.159 for the pregame forecast alone).
+
+## AI assistance
+
+Data analysis, statistical modeling, code, and page design were developed with the assistance of an AI tool (Claude, Anthropic). The author directed the project, reviewed the analysis and its verification against the official BTAA data set, and takes responsibility for the accuracy and content of this work.
